@@ -84,7 +84,7 @@ public class MainActivity extends ActionBarActivity {
 
                     Bundle countBundle = new Bundle();
                     countBundle.putInt("count", i+1);
-                    countBundle.putString("message", "數字增加中"+String.valueOf(i));
+                    countBundle.putString("message", "數字增加中..."+String.valueOf(i));
                     Message msg = new Message();
                     msg.setData(countBundle);
                     mHandler.sendMessage(msg);
