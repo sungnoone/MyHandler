@@ -18,8 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
-    CountToTen countToTen;
-    TextView txtCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +32,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onAttachFragment(Fragment fragment){
-        super.onAttachFragment(fragment);
-    }
-
-    @Override
     public void onStart(){
         super.onStart();
-        txtCount = (TextView)this.findViewById(R.id.textView);
-        countToTen = new CountToTen();
-        countToTen.start();
     }
 
     @Override
@@ -65,34 +56,6 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg){
-            super.handleMessage(msg);
-            txtCount.setText(txtCount.getText()+"\n"+Integer.toString(msg.getData().getInt("count", 0))+msg.getData().getString("message", ""));
-        }
-    };
 
-    public class CountToTen extends Thread{
-        @Override
-        public void run(){
-            super.run();
-            try{
-                for(int i=0 ; i<30 ; i++){
-                    Thread.sleep(1000);
-                    Log.i("MyHandler", String.valueOf(i));
-
-                    Bundle countBundle = new Bundle();
-                    countBundle.putInt("count", i+1);
-                    countBundle.putString("message", "數字增加中..."+String.valueOf(i));
-                    Message msg = new Message();
-                    msg.setData(countBundle);
-                    mHandler.sendMessage(msg);
-                }
-            }catch (Exception e){
-                Log.e("MyHandler", e.toString());
-            }
-        }
-    }
 
 }
